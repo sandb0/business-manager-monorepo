@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+
+cd packages
+cd frontend && yarn lint-staged && cd ../
+cd backend && yarn lint-staged && cd ../
