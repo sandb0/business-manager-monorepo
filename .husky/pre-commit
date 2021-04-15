@@ -3,6 +3,6 @@
 
 
 cd packages
-cd frontend && yarn lint:tsc && yarn lint-staged && cd ../
-cd backend && yarn lint:tsc && yarn lint-staged && cd ../
+cd frontend; yarn lint:tsc; yarn lint-staged; cd ../
+cd backend; yarn lint:tsc; yarn lint-staged; cd ../
 cd ../
