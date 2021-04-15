@@ -28,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "upgrade:latest": "yarn upgrade --latest"
+    "upgrade:latest": "yarn upgrade --latest",
+    "lint:tsc": "tsc -p tsconfig.json --noEmit"
   },
   "eslintConfig": {
     "extends": [
