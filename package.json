@@ -9,7 +9,7 @@
   },
   "private": true,
   "scripts": {
-    "postinstall": "yarn _frontend:install && yarn _backend:install",
+    "postinstall": "yarn _frontend:install && yarn _backend:install && yarn husky install",
     "upgrade:latest": "yarn upgrade --latest && yarn _frontend:upgrade:latest && yarn _backend:upgrade:latest",
     "_frontend:upgrade:latest": "cd packages/frontend && yarn upgrade:latest",
     "_backend:upgrade:latest": "cd packages/backend && yarn upgrade:latest",
