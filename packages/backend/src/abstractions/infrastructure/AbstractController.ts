@@ -11,7 +11,7 @@ export default class AbstractController {
 
   protected async serverError(): Promise<AbstractResponse> {
     return {
-      statusCode: HTTPStatusCode.Ok,
+      statusCode: HTTPStatusCode.ServerError,
       response: {},
     };
   }

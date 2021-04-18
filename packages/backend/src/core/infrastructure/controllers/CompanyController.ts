@@ -38,6 +38,8 @@ export default class CompanyController extends AbstractController {
 
       return this.ok<CompanyDTO>(response);
     } catch (error) {
+      console.error(error);
+
       return this.serverError();
     }
   }
