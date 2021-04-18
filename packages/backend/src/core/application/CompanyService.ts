@@ -18,6 +18,12 @@ export default class CompanyService {
 
     const createdCompany = await this.repository.save(company);
 
-    return this.mapper.toDTO(createdCompany);
+    return this.mapper.toDTO(createdCompany) as CompanyDTO;
+  }
+
+  public async findAll(): Promise<CompanyDTO | CompanyDTO[]> {
+    const companies = await this.repository.findAll();
+
+    return this.mapper.toDTO(companies);
   }
 }

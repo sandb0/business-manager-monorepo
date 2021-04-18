@@ -17,3 +17,13 @@ companyRouter.post('/', async (request, response) => {
 
   return response.status(statusCode).json(controllerResponse);
 });
+
+/** Get all Companies endpoint */
+companyRouter.get('/', async (request, response) => {
+  const {
+    statusCode,
+    response: controllerResponse,
+  } = await companyController.findAll();
+
+  return response.status(statusCode).json(controllerResponse);
+});

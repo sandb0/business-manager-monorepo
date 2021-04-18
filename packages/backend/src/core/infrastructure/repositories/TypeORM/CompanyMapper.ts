@@ -26,31 +26,70 @@ export default class CompanyMapper implements ICompanyMapper {
   /**
    * TypeORM Model to Domain Entity parsing.
    *
-   * @param companyModel TypeORM Model
+   * @param companiesModel TypeORM Model
    * @returns Domain Entity.
    */
-  public toDomain(companyModel: CompanyModel): Company {
-    const { id, name, cnpj, demandValue, annualBilling } = companyModel;
+  public toDomain(
+    companiesModel: CompanyModel | CompanyModel[]
+  ): Company | Company[] {
+    let companies: Company | Company[] = [];
 
-    return new Company({ id, name, cnpj, demandValue, annualBilling });
+    if (Array.isArray(companiesModel)) {
+      companies = companiesModel.map((companyModel) => {
+        const { id, name, cnpj, demandValue, annualBilling } = companyModel;
+
+        return new Company({ id, name, cnpj, demandValue, annualBilling });
+      });
+    } else {
+      const { id, name, cnpj, demandValue, annualBilling } = companiesModel;
+
+      companies = new Company({
+        id,
+        name,
+        cnpj,
+        demandValue,
+        annualBilling,
+      });
+    }
+
+    return companies;
   }
 
   /**
    * Domain Entity to Data Transfer Object parsing.
    *
-   * @param company Domain Entity
+   * @param companies Domain Entity
    * @returns Data Transfer Object
    */
-  public toDTO(company: Company): CompanyDTO {
-    const { id, name, cnpj, demandValue, annualBilling } = company;
-    const companyDTO: CompanyDTO = {
-      id,
-      name,
-      cnpj,
-      demandValue,
-      annualBilling,
-    };
+  public toDTO(companies: Company | Company[]): CompanyDTO | CompanyDTO[] {
+    let companiesDTO: CompanyDTO | CompanyDTO[] = [];
 
-    return companyDTO;
+    if (Array.isArray(companies)) {
+      companiesDTO = companies.map((company) => {
+        const { id, name, cnpj, demandValue, annualBilling } = company;
+        const companyDTO: CompanyDTO = {
+          id,
+          name,
+          cnpj,
+          demandValue,
+          annualBilling,
+        };
+
+        return companyDTO;
+      });
+    } else {
+      const { id, name, cnpj, demandValue, annualBilling } = companies;
+      const companyDTO: CompanyDTO = {
+        id,
+        name,
+        cnpj,
+        demandValue,
+        annualBilling,
+      };
+
+      companiesDTO = companyDTO;
+    }
+
+    return companiesDTO;
   }
 }

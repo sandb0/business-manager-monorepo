@@ -43,4 +43,18 @@ export default class CompanyController extends AbstractController {
       return this.serverError();
     }
   }
+
+  public async findAll(): Promise<
+    AbstractResponse<CompanyDTO | CompanyDTO[] | undefined>
+  > {
+    try {
+      const response = await this.applicationService.findAll();
+
+      return this.ok<CompanyDTO | CompanyDTO[]>(response);
+    } catch (error) {
+      console.error(error);
+
+      return this.serverError();
+    }
+  }
 }

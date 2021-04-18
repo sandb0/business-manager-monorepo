@@ -20,6 +20,14 @@ export default class CompanyRepository implements ICompanyRepository {
 
     const createdCompanyModel = await companyORMRepository.save(companyModel);
 
-    return this.mapper.toDomain(createdCompanyModel);
+    return this.mapper.toDomain(createdCompanyModel) as Company;
+  }
+
+  public async findAll(): Promise<Company | Company[]> {
+    const companyORMRepository = this.connection.getRepository(CompanyModel);
+
+    const companiesModel = await companyORMRepository.find();
+
+    return this.mapper.toDomain(companiesModel);
   }
 }
