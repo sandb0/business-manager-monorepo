@@ -30,4 +30,14 @@ export default class CompanyRepository implements ICompanyRepository {
 
     return this.mapper.toDomain(companiesModel);
   }
+
+  public async findById(companyId: number): Promise<Company | undefined> {
+    const companyORMRepository = this.connection.getRepository(CompanyModel);
+
+    const companyModel = await companyORMRepository.findOne(companyId);
+
+    if (companyModel) {
+      return this.mapper.toDomain(companyModel) as Company;
+    }
+  }
 }

@@ -26,4 +26,12 @@ export default class CompanyService {
 
     return this.mapper.toDTO(companies);
   }
+
+  public async findById(companyId?: string): Promise<CompanyDTO | undefined> {
+    const company = await this.repository.findById(parseInt(companyId || '0'));
+
+    if (company) {
+      return this.mapper.toDTO(company) as CompanyDTO;
+    }
+  }
 }

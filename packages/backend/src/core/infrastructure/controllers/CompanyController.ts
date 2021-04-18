@@ -57,4 +57,18 @@ export default class CompanyController extends AbstractController {
       return this.serverError();
     }
   }
+
+  public async findById(
+    companyId?: string
+  ): Promise<AbstractResponse<CompanyDTO | undefined>> {
+    try {
+      const response = await this.applicationService.findById(companyId);
+
+      return this.ok<CompanyDTO | undefined>(response);
+    } catch (error) {
+      console.error(error);
+
+      return this.serverError();
+    }
+  }
 }
