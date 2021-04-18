@@ -1,5 +1,5 @@
-import CompanyDTO from '../../domain/CompanyDTO';
+import Company from '../../domain/Company';
 
 export default interface ICompanyRepository {
-  save(companyDTO: CompanyDTO): Promise<CompanyDTO>;
+  save(companyDTO: Company): Promise<Company>;
 }

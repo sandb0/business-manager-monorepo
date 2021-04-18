@@ -1,10 +1,14 @@
+import { getConnection } from 'typeorm';
+
 import CompanyController from './infrastructure/controllers/CompanyController';
 import CompanyService from './application/CompanyService';
 import CompanyRepository from './infrastructure/repositories/TypeORM/CompanyRepository';
-import { getConnection } from 'typeorm';
+import CompanyMapper from './infrastructure/repositories/TypeORM/CompanyMapper';
 
-const companyRepository = new CompanyRepository(getConnection());
-
+/** Bind Company layers  */
+const companyMapper = new CompanyMapper();
+const companyRepository = new CompanyRepository(getConnection(), companyMapper);
 const companyService = new CompanyService(companyRepository);
+const companyController = new CompanyController(companyService);
 
-export const companyController = new CompanyController(companyService);
+export { companyController };

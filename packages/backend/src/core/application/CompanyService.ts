@@ -1,5 +1,5 @@
 import Company from '../domain/Company';
-import CompanyDTO from '../domain/CompanyDTO';
+import CompanyDTO from '../infrastructure/CompanyDTO';
 import ICompanyRepository from '../infrastructure/repositories/ICompanyRepository';
 
 export default class CompanyService {
@@ -12,8 +12,6 @@ export default class CompanyService {
   public async save(companyDTO: CompanyDTO): Promise<CompanyDTO> {
     const company = new Company({ id: companyDTO.id });
 
-    await this.repository.save(company);
-
-    return companyDTO;
+    return await this.repository.save(company);
   }
 }

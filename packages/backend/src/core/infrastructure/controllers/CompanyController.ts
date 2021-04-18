@@ -1,7 +1,7 @@
 import AbstractController from '../../../abstractions/infrastructure/AbstractController';
 import { AbstractResponse } from '../../../abstractions/infrastructure/AbstractRespose';
 
-import CompanyDTO from '../../domain/CompanyDTO';
+import CompanyDTO from '../CompanyDTO';
 import CompanyService from '../../application/CompanyService';
 
 type CompanyHTTPRequestData = {

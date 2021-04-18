@@ -4,7 +4,7 @@ import { companyController } from './core';
 
 export const companyRouter = express.Router();
 
-/** Create a new Company */
+/** Create a new Company endpoint */
 companyRouter.post('/', async (request, response) => {
   const requestData = {
     ...(request.body || {}),

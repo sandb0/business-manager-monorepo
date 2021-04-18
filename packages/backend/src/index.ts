@@ -1,16 +1,18 @@
 import express from 'express';
+
 import typeORMConnection from './libs/TypeORM';
-
 import { companyRouter } from './routes';
-
-const applicationPort = process.env.APP_PORT || 8080;
+import { applicationPort } from './configs/app';
 
 const application = express();
 
+/** Enable JSON bodies */
 application.use(express.json());
 
+/** Use routers */
 application.use('/companies', companyRouter);
 
+/** Application bootstrap */
 typeORMConnection
   .then(() => {
     application.listen(applicationPort, () => {
