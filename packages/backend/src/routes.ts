@@ -54,3 +54,15 @@ companyRouter.put('/:companyId', async (request, response) => {
 
   return response.status(statusCode).json(controllerResponse);
 });
+
+/** Update a Company endpoint */
+companyRouter.delete('/:companyId', async (request, response) => {
+  const { companyId } = request.params;
+
+  const {
+    statusCode,
+    response: controllerResponse,
+  } = await companyController.delete(companyId);
+
+  return response.status(statusCode).json(controllerResponse);
+});

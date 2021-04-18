@@ -71,4 +71,18 @@ export default class CompanyController extends AbstractController {
       return this.serverError();
     }
   }
+
+  public async delete(
+    companyId?: string
+  ): Promise<AbstractResponse<boolean | undefined>> {
+    try {
+      const response = await this.applicationService.delete(companyId);
+
+      return this.ok<boolean | undefined>(response);
+    } catch (error) {
+      console.error(error);
+
+      return this.serverError();
+    }
+  }
 }

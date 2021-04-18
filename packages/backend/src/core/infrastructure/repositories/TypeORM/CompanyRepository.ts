@@ -1,4 +1,4 @@
-import { Connection, UpdateDateColumn } from 'typeorm';
+import { Connection } from 'typeorm';
 
 import Company from '../../../domain/Company';
 import ICompanyRepository from '../ICompanyRepository';
@@ -46,6 +46,16 @@ export default class CompanyRepository implements ICompanyRepository {
 
     if (companyModel) {
       return this.mapper.toDomain(companyModel) as Company;
+    }
+  }
+
+  public async delete(companyId: number): Promise<boolean | undefined> {
+    const companyORMRepository = this.connection.getRepository(CompanyModel);
+
+    const companyModel = await companyORMRepository.delete(companyId);
+
+    if (companyModel.affected) {
+      return true;
     }
   }
 

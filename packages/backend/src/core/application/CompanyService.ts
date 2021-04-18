@@ -34,4 +34,8 @@ export default class CompanyService {
       return this.mapper.toDTO(company) as CompanyDTO;
     }
   }
+
+  public async delete(companyId?: string): Promise<boolean | undefined> {
+    return await this.repository.delete(parseInt(companyId || '0'));
+  }
 }
