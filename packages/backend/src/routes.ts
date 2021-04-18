@@ -39,3 +39,18 @@ companyRouter.get('/:companyId', async (request, response) => {
 
   return response.status(statusCode).json(controllerResponse);
 });
+
+/** Update a Company endpoint */
+companyRouter.put('/:companyId', async (request, response) => {
+  const requestData = {
+    ...(request.body || {}),
+    id: request.params.companyId,
+  };
+
+  const {
+    statusCode,
+    response: controllerResponse,
+  } = await companyController.save(requestData);
+
+  return response.status(statusCode).json(controllerResponse);
+});

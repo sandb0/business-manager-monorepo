@@ -1,4 +1,4 @@
-import { Connection } from 'typeorm';
+import { Connection, UpdateDateColumn } from 'typeorm';
 
 import Company from '../../../domain/Company';
 import ICompanyRepository from '../ICompanyRepository';
@@ -17,6 +17,14 @@ export default class CompanyRepository implements ICompanyRepository {
   public async save(company: Company): Promise<Company> {
     const companyORMRepository = this.connection.getRepository(CompanyModel);
     const companyModel = this.mapper.toPersist(company);
+
+    if (company.id) {
+      const updatedCompanyModel = await this.update(companyModel);
+
+      if (updatedCompanyModel) {
+        return updatedCompanyModel;
+      }
+    }
 
     const createdCompanyModel = await companyORMRepository.save(companyModel);
 
@@ -38,6 +46,27 @@ export default class CompanyRepository implements ICompanyRepository {
 
     if (companyModel) {
       return this.mapper.toDomain(companyModel) as Company;
+    }
+  }
+
+  private async update(companyModel: CompanyModel) {
+    const companyORMRepository = this.connection.getRepository(CompanyModel);
+
+    if (companyModel.id) {
+      const updatedCompanyModel = await companyORMRepository.update(
+        companyModel.id,
+        companyModel
+      );
+
+      if (updatedCompanyModel.affected) {
+        const findedUpdatedCompanyModel = await companyORMRepository.findOne(
+          companyModel.id
+        );
+
+        if (findedUpdatedCompanyModel) {
+          return this.mapper.toDomain(findedUpdatedCompanyModel) as Company;
+        }
+      }
     }
   }
 }
