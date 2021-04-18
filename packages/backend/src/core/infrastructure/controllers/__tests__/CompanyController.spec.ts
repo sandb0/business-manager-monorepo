@@ -5,7 +5,7 @@ import CompanyController from '../CompanyController';
 const CompanyServiceMock = jest.fn();
 const companyServiceMock = new CompanyServiceMock();
 
-const expectedCompany: CompanyDTO = {
+const expectedCompanyDTO: CompanyDTO = {
   id: 0,
   name: 'Company',
   cnpj: '0001',
@@ -16,17 +16,17 @@ const expectedCompany: CompanyDTO = {
 describe('Infrastructure - CompanyController', () => {
   describe('Create a new Company: `save()`', () => {
     it('should call the expected Application Service method with correct company data and return a response', async () => {
-      companyServiceMock.save = jest.fn().mockReturnValue(expectedCompany);
+      companyServiceMock.save = jest.fn().mockReturnValue(expectedCompanyDTO);
 
       const SUT = new CompanyController(companyServiceMock);
 
-      const company = await SUT.save(expectedCompany);
+      const company = await SUT.save(expectedCompanyDTO);
 
       expect(companyServiceMock.save).toBeCalledTimes(1);
-      expect(companyServiceMock.save).toBeCalledWith(expectedCompany);
+      expect(companyServiceMock.save).toBeCalledWith(expectedCompanyDTO);
       expect(company).toEqual({
         statusCode: HTTPStatusCode.Ok,
-        response: { success: expectedCompany },
+        response: { success: expectedCompanyDTO },
       });
     });
   });
@@ -35,7 +35,7 @@ describe('Infrastructure - CompanyController', () => {
     it('should call the expected Application Service method with correct company data and return a response', async () => {
       companyServiceMock.findAll = jest
         .fn()
-        .mockReturnValue([expectedCompany, expectedCompany]);
+        .mockReturnValue([expectedCompanyDTO, expectedCompanyDTO]);
 
       const SUT = new CompanyController(companyServiceMock);
 
@@ -44,14 +44,16 @@ describe('Infrastructure - CompanyController', () => {
       expect(companyServiceMock.findAll).toBeCalledTimes(1);
       expect(companies).toEqual({
         statusCode: HTTPStatusCode.Ok,
-        response: { success: [expectedCompany, expectedCompany] },
+        response: { success: [expectedCompanyDTO, expectedCompanyDTO] },
       });
     });
   });
 
   describe('Get a Company By Id: `findById()`', () => {
     it('should call the expected Application Service method with correct company data and return a response', async () => {
-      companyServiceMock.findById = jest.fn().mockReturnValue(expectedCompany);
+      companyServiceMock.findById = jest
+        .fn()
+        .mockReturnValue(expectedCompanyDTO);
 
       const SUT = new CompanyController(companyServiceMock);
 
@@ -62,7 +64,7 @@ describe('Infrastructure - CompanyController', () => {
       expect(companyServiceMock.findById).toBeCalledWith(companyId);
       expect(company).toEqual({
         statusCode: HTTPStatusCode.Ok,
-        response: { success: expectedCompany },
+        response: { success: expectedCompanyDTO },
       });
     });
   });
