@@ -1,8 +1,9 @@
-import CompanyController from './infrastructure/Controllers/CompanyController';
+import CompanyController from './infrastructure/controllers/CompanyController';
 import CompanyService from './application/CompanyService';
-import CompanyRepository from './infrastructure/Repositories/CompanyRepository';
+import CompanyRepository from './infrastructure/repositories/TypeORM/CompanyRepository';
+import { getConnection } from 'typeorm';
 
-const companyRepository = new CompanyRepository();
+const companyRepository = new CompanyRepository(getConnection());
 
 const companyService = new CompanyService(companyRepository);
 

@@ -1,0 +1,31 @@
+version: "3.7"
+
+networks:
+  postgres-network:
+    driver: bridge
+
+services:
+  backend:
+    container_name: backend_container
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      APP_PORT: 8080
+    networks:
+      - postgres-network
+    volumes:
+      - ./packages/backend/src:/usr/application/src
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./packages/backend/.env
+    networks:
+      - postgres-network

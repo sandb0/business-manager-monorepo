@@ -15,7 +15,9 @@
     "noFallthroughCasesInSwitch": true,
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["src"],
   "exclude": ["build", "node_modules", "coverage"]
