@@ -8,7 +8,7 @@ import CompanyMapper from './infrastructure/repositories/TypeORM/CompanyMapper';
 /** Bind Company layers  */
 const companyMapper = new CompanyMapper();
 const companyRepository = new CompanyRepository(getConnection(), companyMapper);
-const companyService = new CompanyService(companyRepository);
+const companyService = new CompanyService(companyRepository, companyMapper);
 const companyController = new CompanyController(companyService);
 
 export { companyController };
