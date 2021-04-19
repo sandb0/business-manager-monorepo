@@ -6,12 +6,18 @@ export const defaultTransition = css`
 
 const boxShadowEffectTransition = defaultTransition;
 
-const boxShadow = css`
+const boxShadow1 = css`
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+`;
+
+const boxShadow2 = css`
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 `;
 
 export const boxShadowEffect = {
   transition: boxShadowEffectTransition,
-  effect: boxShadow,
+  effect1: boxShadow1,
+  effect2: boxShadow2,
 };

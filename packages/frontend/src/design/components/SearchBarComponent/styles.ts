@@ -15,7 +15,7 @@ export const ContainerStyled = styled.div`
   ${boxShadowEffect.transition}
 
   &.onFocus {
-    ${boxShadowEffect.effect}
+    ${boxShadowEffect.effect1}
   }
 
   input {
