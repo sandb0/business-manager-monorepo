@@ -1,23 +1,33 @@
 import React from 'react';
 
+import { CompanyListItemComponent } from '../../design/components';
+import { ButtonElement } from '../../design/elements';
 import { HeaderSection } from '../../design/sections';
 
-import { ContainerStyled } from './styles';
+import {
+  ContainerStyled,
+  TitleContainerStyled,
+  CompaniesListWrapperStyled,
+} from './styles';
 
 const HomePage: React.FC = () => {
-  fetch(process.env.REACT_APP_API_URL + '/companies')
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
   return (
     <ContainerStyled>
       <HeaderSection />
 
-      <main></main>
+      <main>
+        <TitleContainerStyled>
+          <div>
+            <h2>Gerenciador de Empresas</h2>
+          </div>
+
+          <ButtonElement label="Adicionar nova Empresa" to="/company" />
+        </TitleContainerStyled>
+
+        <CompaniesListWrapperStyled>
+          <CompanyListItemComponent />
+        </CompaniesListWrapperStyled>
+      </main>
     </ContainerStyled>
   );
 };

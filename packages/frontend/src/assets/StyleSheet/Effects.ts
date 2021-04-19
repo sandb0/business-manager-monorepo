@@ -1,8 +1,10 @@
 import { css } from 'styled-components';
 
-const boxShadowEffectTransition = css`
+export const defaultTransition = css`
   transition: ease-in 0.1s;
 `;
+
+const boxShadowEffectTransition = defaultTransition;
 
 const boxShadow = css`
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.3);

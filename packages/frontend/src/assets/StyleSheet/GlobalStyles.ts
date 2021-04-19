@@ -22,7 +22,14 @@ export default createGlobalStyle`
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
     background-color: var(--base-color);
+  }
+
+  a {
+    text-decoration: none;
   }
 
   :root {
