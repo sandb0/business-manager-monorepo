@@ -1,10 +1,15 @@
 version: "3.7"
 
-networks:
-  postgres-network:
-    driver: bridge
-
 services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./packages/backend/.env
+
   backend:
     container_name: backend_container
     build:
@@ -14,18 +19,21 @@ services:
       - "8080:8080"
     environment:
       APP_PORT: 8080
-    networks:
-      - postgres-network
     volumes:
       - ./packages/backend/src:/usr/application/src
+    depends_on:
+      - postgres
 
-  postgres:
-    container_name: postgres_container
-    image: postgres
-    restart: always
+  frontend:
+    container_name: frontend_container
+    build:
+      context: ./packages/frontend
+      dockerfile: Dockerfile
     ports:
-      - "5432:5432"
+      - "3000:3000"
     env_file:
-      - ./packages/backend/.env
-    networks:
-      - postgres-network
+      - ./packages/frontend/.env
+    volumes:
+      - ./packages/frontend/src:/usr/application/src
+    depends_on:
+      - backend

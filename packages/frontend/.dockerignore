@@ -1,17 +1,8 @@
 # dependencies
 node_modules
-npm*
-yarn*
 
 # testing
 coverage
 
 # production
 build
-
-# misc
-.husky
-.editorconfig
-*ignore
-.env*
-Dockerfile

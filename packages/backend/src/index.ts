@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 import typeORMConnection from './libs/TypeORM';
 import { companyRouter } from './routes';
@@ -8,6 +9,8 @@ const application = express();
 
 /** Enable JSON bodies */
 application.use(express.json());
+
+application.use(cors());
 
 /** Use routers */
 application.use('/companies', companyRouter);
