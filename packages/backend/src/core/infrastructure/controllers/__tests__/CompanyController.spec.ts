@@ -29,6 +29,44 @@ describe('Infrastructure - CompanyController', () => {
         response: { success: expectedCompanyDTO },
       });
     });
+
+    it('should return undefined on undefined request data', async () => {
+      const defaultRequestData = {
+        id: 0,
+        name: '',
+        cnpj: '',
+        demandValue: 0,
+        annualBilling: 0,
+      };
+
+      companyServiceMock.save = jest.fn().mockReturnValue(undefined);
+
+      const SUT = new CompanyController(companyServiceMock);
+
+      const company = await SUT.save({});
+
+      expect(companyServiceMock.save).toBeCalledTimes(1);
+      expect(companyServiceMock.save).toBeCalledWith(defaultRequestData);
+      expect(company).toEqual({
+        statusCode: HTTPStatusCode.Ok,
+        response: { success: undefined },
+      });
+    });
+
+    it('should return HTTP Status Code 500 on error', async () => {
+      companyServiceMock.save = jest.fn().mockImplementation(() => {
+        throw new Error('Error');
+      });
+
+      const SUT = new CompanyController(companyServiceMock);
+
+      const error = await SUT.save(expectedCompanyDTO);
+
+      expect(error).toEqual({
+        statusCode: HTTPStatusCode.ServerError,
+        response: {},
+      });
+    });
   });
 
   describe('Get all Companies: `findAll()`', () => {
@@ -45,6 +83,21 @@ describe('Infrastructure - CompanyController', () => {
       expect(companies).toEqual({
         statusCode: HTTPStatusCode.Ok,
         response: { success: [expectedCompanyDTO, expectedCompanyDTO] },
+      });
+    });
+
+    it('should return HTTP Status Code 500 on error', async () => {
+      companyServiceMock.findAll = jest.fn().mockImplementation(() => {
+        throw new Error('Error');
+      });
+
+      const SUT = new CompanyController(companyServiceMock);
+
+      const error = await SUT.findAll();
+
+      expect(error).toEqual({
+        statusCode: HTTPStatusCode.ServerError,
+        response: {},
       });
     });
   });
@@ -67,6 +120,21 @@ describe('Infrastructure - CompanyController', () => {
         response: { success: expectedCompanyDTO },
       });
     });
+
+    it('should return HTTP Status Code 500 on error', async () => {
+      companyServiceMock.findById = jest.fn().mockImplementation(() => {
+        throw new Error('Error');
+      });
+
+      const SUT = new CompanyController(companyServiceMock);
+
+      const error = await SUT.findById();
+
+      expect(error).toEqual({
+        statusCode: HTTPStatusCode.ServerError,
+        response: {},
+      });
+    });
   });
 
   describe('Delete a Company By Id: `delete()`', () => {
@@ -83,6 +151,21 @@ describe('Infrastructure - CompanyController', () => {
       expect(companies).toEqual({
         statusCode: HTTPStatusCode.Ok,
         response: { success: true },
+      });
+    });
+
+    it('should return HTTP Status Code 500 on error', async () => {
+      companyServiceMock.delete = jest.fn().mockImplementation(() => {
+        throw new Error('Error');
+      });
+
+      const SUT = new CompanyController(companyServiceMock);
+
+      const error = await SUT.delete();
+
+      expect(error).toEqual({
+        statusCode: HTTPStatusCode.ServerError,
+        response: {},
       });
     });
   });

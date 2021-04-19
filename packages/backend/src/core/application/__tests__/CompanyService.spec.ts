@@ -1,4 +1,3 @@
-import HTTPStatusCode from '../../../abstractions/infrastructure/HTTPStatusCode';
 import Company from '../../domain/Company';
 import CompanyDTO from '../../infrastructure/CompanyDTO';
 import CompanyService from '../CompanyService';
@@ -90,6 +89,17 @@ describe('Application - CompanyService', () => {
 
       expect(companyDTO).toEqual(expectedCompanyDTO);
     });
+
+    it('should return undefined when not find a Company', async () => {
+      companyRepositoryMock.findById = jest.fn().mockReturnValue(undefined);
+
+      const SUT = new CompanyService(companyRepositoryMock, companyMapperMock);
+
+      const companyId = undefined;
+      const companyDTO = await SUT.findById(companyId);
+
+      expect(companyDTO).toEqual(undefined);
+    });
   });
 
   describe('Delete a Company: `delete()`', () => {
@@ -106,6 +116,18 @@ describe('Application - CompanyService', () => {
       expect(companyRepositoryMock.delete).toBeCalledWith(parseInt(companyId));
 
       expect(status).toEqual(expectedStatus);
+    });
+
+    it('should return undefined when not find a Company to delete it', async () => {
+      const expectedStatus = undefined;
+      companyRepositoryMock.delete = jest.fn().mockReturnValue(expectedStatus);
+
+      const SUT = new CompanyService(companyRepositoryMock, companyMapperMock);
+
+      const companyId = undefined;
+      const status = await SUT.delete(companyId);
+
+      expect(status).toBe(undefined);
     });
   });
 });

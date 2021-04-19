@@ -38,8 +38,6 @@ export default class CompanyController extends AbstractController {
 
       return this.ok<CompanyDTO>(response);
     } catch (error) {
-      console.error(error);
-
       return this.serverError();
     }
   }
@@ -52,8 +50,6 @@ export default class CompanyController extends AbstractController {
 
       return this.ok<CompanyDTO | CompanyDTO[]>(response);
     } catch (error) {
-      console.error(error);
-
       return this.serverError();
     }
   }
@@ -66,8 +62,6 @@ export default class CompanyController extends AbstractController {
 
       return this.ok<CompanyDTO | undefined>(response);
     } catch (error) {
-      console.error(error);
-
       return this.serverError();
     }
   }
@@ -80,8 +74,6 @@ export default class CompanyController extends AbstractController {
 
       return this.ok<boolean | undefined>(response);
     } catch (error) {
-      console.error(error);
-
       return this.serverError();
     }
   }
