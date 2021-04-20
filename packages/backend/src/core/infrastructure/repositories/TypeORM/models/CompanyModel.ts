@@ -9,6 +9,9 @@ export default class CompanyModel {
   public name!: string;
 
   @Column()
+  public about!: string;
+
+  @Column()
   public cnpj!: string;
 
   @Column()

@@ -11,11 +11,12 @@ export default class CompanyMapper implements ICompanyMapper {
    * @returns TypeORM Model
    */
   public toPersist(company: Company): CompanyModel {
-    const { id, name, cnpj, demandValue, annualBilling } = company;
+    const { id, name, about, cnpj, demandValue, annualBilling } = company;
     const companyModel = new CompanyModel();
 
     companyModel.id = id;
     companyModel.name = name;
+    companyModel.about = about;
     companyModel.cnpj = cnpj;
     companyModel.demandValue = demandValue;
     companyModel.annualBilling = annualBilling;
@@ -36,16 +37,38 @@ export default class CompanyMapper implements ICompanyMapper {
 
     if (Array.isArray(companiesModel)) {
       companies = companiesModel.map((companyModel) => {
-        const { id, name, cnpj, demandValue, annualBilling } = companyModel;
+        const {
+          id,
+          name,
+          about,
+          cnpj,
+          demandValue,
+          annualBilling,
+        } = companyModel;
 
-        return new Company({ id, name, cnpj, demandValue, annualBilling });
+        return new Company({
+          id,
+          name,
+          about,
+          cnpj,
+          demandValue,
+          annualBilling,
+        });
       });
     } else {
-      const { id, name, cnpj, demandValue, annualBilling } = companiesModel;
+      const {
+        id,
+        name,
+        about,
+        cnpj,
+        demandValue,
+        annualBilling,
+      } = companiesModel;
 
       companies = new Company({
         id,
         name,
+        about,
         cnpj,
         demandValue,
         annualBilling,
@@ -66,10 +89,11 @@ export default class CompanyMapper implements ICompanyMapper {
 
     if (Array.isArray(companies)) {
       companiesDTO = companies.map((company) => {
-        const { id, name, cnpj, demandValue, annualBilling } = company;
+        const { id, name, about, cnpj, demandValue, annualBilling } = company;
         const companyDTO: CompanyDTO = {
           id,
           name,
+          about,
           cnpj,
           demandValue,
           annualBilling,
@@ -78,10 +102,11 @@ export default class CompanyMapper implements ICompanyMapper {
         return companyDTO;
       });
     } else {
-      const { id, name, cnpj, demandValue, annualBilling } = companies;
+      const { id, name, about, cnpj, demandValue, annualBilling } = companies;
       const companyDTO: CompanyDTO = {
         id,
         name,
+        about,
         cnpj,
         demandValue,
         annualBilling,

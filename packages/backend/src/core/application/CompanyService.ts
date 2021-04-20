@@ -13,8 +13,15 @@ export default class CompanyService {
   }
 
   public async save(companyDTO: CompanyDTO): Promise<CompanyDTO> {
-    const { id, name, cnpj, demandValue, annualBilling } = companyDTO;
-    const company = new Company({ id, name, cnpj, demandValue, annualBilling });
+    const { id, name, about, cnpj, demandValue, annualBilling } = companyDTO;
+    const company = new Company({
+      id,
+      name,
+      about,
+      cnpj,
+      demandValue,
+      annualBilling,
+    });
 
     const createdCompany = await this.repository.save(company);
 
