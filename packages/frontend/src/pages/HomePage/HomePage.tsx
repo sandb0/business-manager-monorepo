@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Company from '../../core/domain/Company';
+import CompanyPresenter from '../../core/infrastructure/Presenters/CompanyPresenter';
+import { CompanyReduxStore } from '../../core/infrastructure/StateManagers/Redux/CompanyRedux';
 
 import {
   CompanyListItemComponent,
@@ -9,7 +14,31 @@ import { HeaderSection, MainSection } from '../../design/sections';
 
 import { ContainerStyled, CompaniesListWrapperStyled } from './styles';
 
-const HomePage: React.FC = () => {
+type Props = {
+  presenter: CompanyPresenter;
+};
+
+const HomePage: React.FC<Props> = (props: Props) => {
+  const { presenter } = props;
+
+  const dispatch = useDispatch();
+
+  const companies = useSelector(
+    (companyState: CompanyReduxStore) => companyState.company.companies
+  );
+
+  useEffect(() => {
+    (async () => {
+      dispatch(await presenter.findAll());
+    })();
+  }, [dispatch]);
+
+  const cardsCompaniesComponents = companies.map(
+    (company: Company, index: number) => (
+      <CompanyListItemComponent key={index} name={company.name} />
+    )
+  );
+
   return (
     <ContainerStyled>
       <HeaderSection />
@@ -20,7 +49,7 @@ const HomePage: React.FC = () => {
         </TitleComponent>
 
         <CompaniesListWrapperStyled>
-          <CompanyListItemComponent />
+          {cardsCompaniesComponents}
         </CompaniesListWrapperStyled>
       </MainSection>
     </ContainerStyled>

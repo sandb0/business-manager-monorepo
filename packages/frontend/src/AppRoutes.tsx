@@ -3,13 +3,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { HomePage, FormsCompanyPage, SingleCompanyPage } from './pages';
 
+import companyPresenter from './core';
+
 const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
         {/** Home Page */}
         <Route path="/" exact>
-          <HomePage />
+          <HomePage presenter={companyPresenter} />
         </Route>
 
         {/** Create Componay Page */}

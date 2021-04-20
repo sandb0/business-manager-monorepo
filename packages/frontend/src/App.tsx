@@ -1,4 +1,7 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+
+import reduxStore from './libs/ReduxStore';
 
 import AppRoutes from './AppRoutes';
 import GlobalStyles from './assets/StyleSheet/GlobalStyles';
@@ -6,9 +9,11 @@ import GlobalStyles from './assets/StyleSheet/GlobalStyles';
 const App: React.FC = () => {
   return (
     <>
-      <AppRoutes />
+      <Provider store={reduxStore}>
+        <AppRoutes />
 
-      <GlobalStyles />
+        <GlobalStyles />
+      </Provider>
     </>
   );
 };

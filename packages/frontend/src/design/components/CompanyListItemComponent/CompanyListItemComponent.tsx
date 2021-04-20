@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 
 import { ContainerStyled } from './styles';
 
-const CompanyListItemComponent: React.FC = () => {
+type Props = {
+  name: string;
+};
+
+const CompanyListItemComponent: React.FC<Props> = (props: Props) => {
+  const { name } = props;
+
   return (
     <ContainerStyled>
       <Link to="/company/1">
-        <h3>Empresa</h3>
+        <h3>{name}</h3>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.
