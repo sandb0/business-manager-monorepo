@@ -35,7 +35,12 @@ const HomePage: React.FC<Props> = (props: Props) => {
 
   const cardsCompaniesComponents = companies.map(
     (company: Company, index: number) => (
-      <CompanyListItemComponent key={index} name={company.name} />
+      <CompanyListItemComponent
+        key={index}
+        id={company.id}
+        name={company.name}
+        about={company.about}
+      />
     )
   );
 

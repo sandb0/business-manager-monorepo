@@ -4,20 +4,19 @@ import { Link } from 'react-router-dom';
 import { ContainerStyled } from './styles';
 
 type Props = {
+  id: number;
   name: string;
+  about: string;
 };
 
 const CompanyListItemComponent: React.FC<Props> = (props: Props) => {
-  const { name } = props;
+  const { id, name, about } = props;
 
   return (
     <ContainerStyled>
-      <Link to="/company/1">
+      <Link to={`/company/${id}`}>
         <h3>{name}</h3>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
-        </p>
+        <p>{about}</p>
       </Link>
     </ContainerStyled>
   );

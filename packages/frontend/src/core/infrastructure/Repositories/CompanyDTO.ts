@@ -1,6 +1,7 @@
 type CompanyDTO = {
-  id?: number;
+  id: number;
   name: string;
+  about: string;
   cnpj: string;
   demandValue: number;
   annualBilling: number;
