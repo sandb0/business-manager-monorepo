@@ -8,6 +8,7 @@ const companyServiceMock = new CompanyServiceMock();
 const expectedCompanyDTO: CompanyDTO = {
   id: 0,
   name: 'Company',
+  about: 'About',
   cnpj: '0001',
   demandValue: 1,
   annualBilling: 2,
@@ -34,6 +35,7 @@ describe('Infrastructure - CompanyController', () => {
       const defaultRequestData = {
         id: 0,
         name: '',
+        about: '',
         cnpj: '',
         demandValue: 0,
         annualBilling: 0,

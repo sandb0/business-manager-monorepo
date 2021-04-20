@@ -11,6 +11,7 @@ const companyMapperMock = new CompanyMapperMock();
 const expectedCompanyDTO: CompanyDTO = {
   id: 0,
   name: 'Company',
+  about: 'About',
   cnpj: '0001',
   demandValue: 1,
   annualBilling: 2,
@@ -19,6 +20,7 @@ const expectedCompanyDTO: CompanyDTO = {
 const expectedCompany = new Company({
   id: 0,
   name: 'Company',
+  about: 'About',
   cnpj: '0001',
   demandValue: 1,
   annualBilling: 2,

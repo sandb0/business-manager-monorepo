@@ -3,6 +3,7 @@ import Company from '../Company';
 const companyProps = {
   id: 2,
   name: 'Name',
+  about: 'About',
   cnpj: '0001',
   demandValue: 2,
   annualBilling: 2,
@@ -14,6 +15,7 @@ describe('Domain - Company', () => {
 
     expect(SUT.id).toBe(companyProps.id);
     expect(SUT.name).toBe(companyProps.name);
+    expect(SUT.about).toBe(companyProps.about);
     expect(SUT.cnpj).toBe(companyProps.cnpj);
     expect(SUT.demandValue).toBe(companyProps.demandValue);
     expect(SUT.annualBilling).toBe(companyProps.annualBilling);
