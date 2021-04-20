@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Company from '../../core/domain/Company';
 import CompanyPresenter from '../../core/infrastructure/Presenters/CompanyPresenter';
+import CompanyDTO from '../../core/infrastructure/Repositories/CompanyDTO';
 import { CompanyReduxStore } from '../../core/infrastructure/StateManagers/Redux/CompanyRedux';
 
 import {
@@ -33,16 +33,16 @@ const HomePage: React.FC<Props> = (props: Props) => {
     })();
   }, [dispatch]);
 
-  const cardsCompaniesComponents = companies.map(
-    (company: Company, index: number) => (
-      <CompanyListItemComponent
-        key={index}
-        id={company.id}
-        name={company.name}
-        about={company.about}
-      />
-    )
-  );
+  const cardsCompaniesComponents = companies?.length
+    ? companies.map((company: CompanyDTO, index: number) => (
+        <CompanyListItemComponent
+          key={index}
+          id={company.id}
+          name={company.name}
+          about={company.about}
+        />
+      ))
+    : 'Não há nenhuma empresa cadastrada';
 
   return (
     <ContainerStyled>

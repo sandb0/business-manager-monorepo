@@ -1,4 +1,5 @@
 import CompanyService from '../../application/CompanyService';
+import CompanyDTO from '../Repositories/CompanyDTO';
 import CompanyActions from '../StateManagers/Redux/CompanyActions';
 
 export default class CountryPresenter {
@@ -17,5 +18,13 @@ export default class CountryPresenter {
     const companies = await this.applicationService.findAll();
 
     return this.reduxActions.findAll(companies);
+  }
+
+  public async save(formData: CompanyDTO) {
+    const company = await this.applicationService.save(formData);
+
+    if (company) {
+      return this.reduxActions.findById(company);
+    }
   }
 }

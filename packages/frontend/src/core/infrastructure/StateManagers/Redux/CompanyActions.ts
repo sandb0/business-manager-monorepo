@@ -8,4 +8,11 @@ export default class CountryActions {
       payload: { companies },
     };
   }
+
+  public findById(company: Company): CompanyReduxAction {
+    return {
+      type: 'SELECT_ONE',
+      payload: { selectedCompany: company },
+    };
+  }
 }

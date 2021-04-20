@@ -16,7 +16,7 @@ const AppRoutes: React.FC = () => {
 
         {/** Create Componay Page */}
         <Route path="/company" exact>
-          <FormsCompanyPage />
+          <FormsCompanyPage presenter={companyPresenter} />
         </Route>
 
         {/** View Company Page */}
@@ -26,7 +26,7 @@ const AppRoutes: React.FC = () => {
 
         {/** Edit Company Page */}
         <Route path="/company/:id/edit" exact>
-          <FormsCompanyPage />
+          <FormsCompanyPage presenter={companyPresenter} />
         </Route>
       </Switch>
     </BrowserRouter>

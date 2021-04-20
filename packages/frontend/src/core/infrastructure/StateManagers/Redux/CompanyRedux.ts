@@ -5,11 +5,11 @@ export type CompanyReduxStore = {
 };
 
 export type CompanyReduxState = {
-  companies: Company[];
+  companies?: Company[];
   selectedCompany?: Company;
 };
 
 export type CompanyReduxAction = {
-  type: 'FIND_ALL';
+  type: 'FIND_ALL' | 'SELECT_ONE';
   payload: CompanyReduxState;
 };

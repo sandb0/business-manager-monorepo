@@ -1,4 +1,5 @@
 import { AxiosStatic } from 'axios';
+import Company from '../../domain/Company';
 import CompanyDTO from './CompanyDTO';
 import CountryMapper from './CompanyMapper';
 
@@ -23,6 +24,24 @@ export default class CompanyHTTPRepository {
       companiesResponse = responseData.success as CompanyDTO[];
     }
 
-    return this.repositoryMapper.toDomain(companiesResponse);
+    return this.repositoryMapper.toDomain(companiesResponse) as Company[];
+  }
+
+  public async save(company: Company) {
+    const companyDTO = this.repositoryMapper.toDTO(company);
+
+    const response = await this.httpClient.post(
+      process.env.REACT_APP_API_URL + '/companies',
+      { ...companyDTO }
+    );
+
+    let companyResponse: CompanyDTO;
+    const responseData = response.data;
+
+    if (responseData.success) {
+      companyResponse = responseData.success as CompanyDTO;
+
+      return this.repositoryMapper.toDomain(companyResponse) as Company;
+    }
   }
 }

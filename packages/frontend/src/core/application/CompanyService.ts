@@ -1,3 +1,5 @@
+import Company from '../domain/Company';
+import CompanyDTO from '../infrastructure/Repositories/CompanyDTO';
 import CompanyHTTPRepository from '../infrastructure/Repositories/CompanyHTTPRepository';
 
 export default class CompanyService {
@@ -9,5 +11,11 @@ export default class CompanyService {
 
   public async findAll() {
     return await this.remoteRepository.findAll();
+  }
+
+  public async save(companyDTO: CompanyDTO) {
+    const company = new Company(companyDTO);
+
+    return await this.remoteRepository.save(company);
   }
 }
