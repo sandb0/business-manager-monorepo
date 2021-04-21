@@ -10,6 +10,7 @@ const companyReducer = (
 ): CompanyReduxState => {
   switch (action.type) {
     case 'FIND_ALL':
+    case 'SELECT_ONE':
       return {
         ...state,
         companies: action.payload.companies,

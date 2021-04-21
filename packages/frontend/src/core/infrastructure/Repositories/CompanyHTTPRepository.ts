@@ -27,6 +27,20 @@ export default class CompanyHTTPRepository {
     return this.repositoryMapper.toDomain(companiesResponse) as Company[];
   }
 
+  public async findById(companyId: number) {
+    const response = await this.httpClient.get(
+      process.env.REACT_APP_API_URL + '/companies/' + companyId
+    );
+
+    const responseData = response.data;
+
+    if (responseData.success) {
+      const companyResponse = responseData.success as CompanyDTO;
+
+      return this.repositoryMapper.toDomain(companyResponse) as Company;
+    }
+  }
+
   public async save(company: Company) {
     const companyDTO = this.repositoryMapper.toDTO(company);
 
@@ -35,11 +49,10 @@ export default class CompanyHTTPRepository {
       { ...companyDTO }
     );
 
-    let companyResponse: CompanyDTO;
     const responseData = response.data;
 
     if (responseData.success) {
-      companyResponse = responseData.success as CompanyDTO;
+      const companyResponse = responseData.success as CompanyDTO;
 
       return this.repositoryMapper.toDomain(companyResponse) as Company;
     }

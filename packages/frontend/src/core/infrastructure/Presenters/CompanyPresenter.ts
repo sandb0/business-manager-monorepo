@@ -20,11 +20,15 @@ export default class CountryPresenter {
     return this.reduxActions.findAll(companies);
   }
 
-  public async save(formData: CompanyDTO) {
-    const company = await this.applicationService.save(formData);
+  public async findById(companyId: number) {
+    const company = await this.applicationService.findById(companyId);
 
     if (company) {
       return this.reduxActions.findById(company);
     }
+  }
+
+  public async save(formData: CompanyDTO) {
+    return await this.applicationService.save(formData);
   }
 }

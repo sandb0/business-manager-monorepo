@@ -13,6 +13,10 @@ export default class CompanyService {
     return await this.remoteRepository.findAll();
   }
 
+  public async findById(companyId: number) {
+    return await this.remoteRepository.findById(companyId);
+  }
+
   public async save(companyDTO: CompanyDTO) {
     const company = new Company(companyDTO);
 

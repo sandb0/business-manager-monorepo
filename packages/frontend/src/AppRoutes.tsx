@@ -20,12 +20,12 @@ const AppRoutes: React.FC = () => {
         </Route>
 
         {/** View Company Page */}
-        <Route path="/company/:id" exact>
-          <SingleCompanyPage />
+        <Route path="/company/:companyId" exact>
+          <SingleCompanyPage presenter={companyPresenter} />
         </Route>
 
         {/** Edit Company Page */}
-        <Route path="/company/:id/edit" exact>
+        <Route path="/company/:companyId/edit" exact>
           <FormsCompanyPage presenter={companyPresenter} />
         </Route>
       </Switch>
