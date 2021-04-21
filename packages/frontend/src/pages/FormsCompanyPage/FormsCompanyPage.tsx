@@ -50,23 +50,32 @@ const FormsCompanyPage: React.FC<Props> = (props: Props) => {
         dispatch(await presenter.findById(parseInt(companyId || '0')));
       })();
 
-      setFormData(company || initialFormDataState);
+      if (company) {
+        setFormData({
+          id: company.id,
+          name: company.name,
+          about: company.about,
+          cnpj: company.cnpj,
+          demandValue: company.demandValue,
+          annualBilling: company.annualBilling,
+        });
+      }
     }
   }, [dispatch]);
 
-  const handleEditSubmit = () => {
+  const handleEditSubmit = async () => {
     // Add `companyId` on API request.
-    formData.id = parseInt(companyId || '0');
+    const editedFormData = { ...formData, id: parseInt(companyId || '0') };
 
-    const company = presenter.save(formData);
+    const company = await presenter.save(editedFormData);
 
     if (company) {
       history.goBack();
     }
   };
 
-  const handleCreateSubmit = () => {
-    const company = presenter.save(formData);
+  const handleCreateSubmit = async () => {
+    const company = await presenter.save(formData);
 
     if (company) {
       history.push('/');
