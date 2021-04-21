@@ -96,7 +96,7 @@ const FormsCompanyPage: React.FC<Props> = (props: Props) => {
       <MainSection>
         {titleComponent}
 
-        <form onSubmit={(event) => handleSubmit(event)}>
+        <form className="forms" onSubmit={(event) => handleSubmit(event)}>
           <div>
             <h4>Nome da Empresa</h4>
             <input

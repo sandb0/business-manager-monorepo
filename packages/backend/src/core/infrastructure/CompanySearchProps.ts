@@ -1,4 +1,5 @@
 type CompanySearchProps = {
+  searchTerm: string;
   page: number;
   size: number;
 };

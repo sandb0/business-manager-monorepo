@@ -10,11 +10,11 @@ const AppRoutes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Redirect to="/page/1" />
+          <Redirect to="/company/page/1" />
         </Route>
 
         {/** Home Page */}
-        <Route path="/page/:page?" exact>
+        <Route path="/company/page/:page?" exact>
           <HomePage presenter={companyPresenter} />
         </Route>
 

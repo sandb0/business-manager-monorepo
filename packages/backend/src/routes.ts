@@ -21,6 +21,7 @@ companyRouter.post('/', async (request, response) => {
 /** Get all Companies endpoint */
 companyRouter.get('/', async (request, response) => {
   const requestData = {
+    searchTerm: request.query.searchTerm?.toString() || '',
     page: parseInt(request.query.page?.toString() || '0'),
     size: parseInt(request.query.size?.toString() || '0'),
   };

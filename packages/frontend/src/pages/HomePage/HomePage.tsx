@@ -43,16 +43,25 @@ const HomePage: React.FC<Props> = (props: Props) => {
     return zeroOrPage <= 0 ? 0 : zeroOrPage - 1;
   };
 
+  const query = new URLSearchParams(location.search);
+  const searchTerm = query.get('name') || '';
+
   useEffect(() => {
     (async () => {
       const zeroOrPage = getPage();
 
-      dispatch(await presenter.findAll({ size: pageSize, page: zeroOrPage }));
+      dispatch(
+        await presenter.findAll({
+          size: pageSize,
+          page: zeroOrPage,
+          searchTerm,
+        })
+      );
     })();
   }, [dispatch, page]);
 
   const handlePagination = (event: any, value: any) => {
-    history.push(value.toString());
+    history.push(value.toString() + `?name=${searchTerm}`);
   };
 
   const cardsCompaniesComponents = companies?.companies?.length

@@ -12,12 +12,14 @@ export const ContainerStyled = styled.div`
   padding: 15px ${inputHorizontalPadding};
   display: flex;
   justify-content: space-between;
+  align-items: center;
   ${boxShadowEffect.transition}
 
   &.onFocus {
     ${boxShadowEffect.effect1}
   }
 
+  form.searchForm,
   input {
     width: 100%;
     margin-right: ${inputHorizontalPadding};

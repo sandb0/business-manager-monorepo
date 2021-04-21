@@ -18,7 +18,7 @@ const inputStyle = css`
 `;
 
 export const ContainerStyled = styled.div`
-  form {
+  form.forms {
     width: 400px;
     margin: 50px auto 0 auto;
 

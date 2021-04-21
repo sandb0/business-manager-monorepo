@@ -4,6 +4,7 @@ import { AbstractResponse } from '../../../abstractions/infrastructure/AbstractR
 import CompanyDTO from '../CompanyDTO';
 import CompanyService from '../../application/CompanyService';
 import CompanySearchProps from '../CompanySearchProps';
+import { request } from 'express';
 
 type CompanyHTTPRequestData = {
   id?: number;
@@ -54,6 +55,7 @@ export default class CompanyController extends AbstractController {
     requestData: CompanySearchProps
   ): Promise<AbstractResponse<CompanyFindAllHTTPResponseData | undefined>> {
     const searchProps: CompanySearchProps = {
+      searchTerm: requestData.searchTerm || '',
       page: requestData.page || 0,
       size: requestData.size || 3,
     };

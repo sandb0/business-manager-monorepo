@@ -14,10 +14,11 @@ export default class CompanyHTTPRepository {
   }
 
   public async findAll(searchProps: CompanySearchProps) {
-    const { size, page } = searchProps;
+    const { size, page, searchTerm } = searchProps;
 
     const response = await this.httpClient.get(
-      process.env.REACT_APP_API_URL + `/companies?page=${page}&size=${size}`
+      process.env.REACT_APP_API_URL +
+        `/companies?page=${page}&size=${size}&searchTerm=${searchTerm}`
     );
 
     let companiesResponse: CompanyDTO[] = [];

@@ -80,7 +80,11 @@ describe('Infrastructure - CompanyController', () => {
 
       const SUT = new CompanyController(companyServiceMock);
 
-      const companies = await SUT.findAll({ page: 0, size: 10 });
+      const companies = await SUT.findAll({
+        page: 0,
+        size: 10,
+        searchTerm: '',
+      });
 
       expect(companyServiceMock.findAll).toBeCalledTimes(1);
     });
@@ -92,7 +96,7 @@ describe('Infrastructure - CompanyController', () => {
 
       const SUT = new CompanyController(companyServiceMock);
 
-      const error = await SUT.findAll({ page: 0, size: 10 });
+      const error = await SUT.findAll({ page: 0, size: 10, searchTerm: '' });
 
       expect(error).toEqual({
         statusCode: HTTPStatusCode.ServerError,

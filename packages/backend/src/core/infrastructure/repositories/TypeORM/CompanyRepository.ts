@@ -1,4 +1,4 @@
-import { Connection } from 'typeorm';
+import { Connection, Raw } from 'typeorm';
 
 import Company from '../../../domain/Company';
 import CompanySearchProps from '../../CompanySearchProps';
@@ -38,6 +38,12 @@ export default class CompanyRepository implements ICompanyRepository {
     const companyORMRepository = this.connection.getRepository(CompanyModel);
 
     const [companiesModel, count] = await companyORMRepository.findAndCount({
+      where: {
+        name: Raw(
+          (alias) =>
+            `LOWER(${alias}) LIKE '%${searchProps.searchTerm.toLowerCase()}%'`
+        ),
+      },
       skip: searchProps.page * searchProps.size,
       take: searchProps.size,
     });

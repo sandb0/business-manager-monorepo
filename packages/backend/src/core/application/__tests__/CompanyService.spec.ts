@@ -57,7 +57,11 @@ describe('Application - CompanyService', () => {
 
       const SUT = new CompanyService(companyRepositoryMock, companyMapperMock);
 
-      const companiesDTO = await SUT.findAll({ page: 0, size: 10 });
+      const companiesDTO = await SUT.findAll({
+        page: 0,
+        size: 10,
+        searchTerm: '',
+      });
 
       expect(companyRepositoryMock.findAll).toBeCalledTimes(1);
 
