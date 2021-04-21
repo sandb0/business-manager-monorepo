@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { HomePage, FormsCompanyPage, SingleCompanyPage } from './pages';
 
@@ -9,13 +9,17 @@ const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {/** Home Page */}
         <Route path="/" exact>
+          <Redirect to="/page/1" />
+        </Route>
+
+        {/** Home Page */}
+        <Route path="/page/:page?" exact>
           <HomePage presenter={companyPresenter} />
         </Route>
 
         {/** Create Componay Page */}
-        <Route path="/company" exact>
+        <Route path="/company/" exact>
           <FormsCompanyPage presenter={companyPresenter} />
         </Route>
 

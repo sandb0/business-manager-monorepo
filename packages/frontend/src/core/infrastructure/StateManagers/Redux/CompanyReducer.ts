@@ -1,7 +1,7 @@
 import { CompanyReduxAction, CompanyReduxState } from './CompanyRedux';
 
 const initialState: CompanyReduxState = {
-  companies: [],
+  companies: {},
 };
 
 const companyReducer = (

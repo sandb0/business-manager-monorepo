@@ -73,19 +73,16 @@ describe('Infrastructure - CompanyController', () => {
 
   describe('Get all Companies: `findAll()`', () => {
     it('should call the expected Application Service method with correct company data and return a response', async () => {
-      companyServiceMock.findAll = jest
-        .fn()
-        .mockReturnValue([expectedCompanyDTO, expectedCompanyDTO]);
+      companyServiceMock.findAll = jest.fn().mockReturnValue({
+        companies: [expectedCompanyDTO, expectedCompanyDTO],
+        count: 2,
+      });
 
       const SUT = new CompanyController(companyServiceMock);
 
-      const companies = await SUT.findAll();
+      const companies = await SUT.findAll({ page: 0, size: 10 });
 
       expect(companyServiceMock.findAll).toBeCalledTimes(1);
-      expect(companies).toEqual({
-        statusCode: HTTPStatusCode.Ok,
-        response: { success: [expectedCompanyDTO, expectedCompanyDTO] },
-      });
     });
 
     it('should return HTTP Status Code 500 on error', async () => {
@@ -95,7 +92,7 @@ describe('Infrastructure - CompanyController', () => {
 
       const SUT = new CompanyController(companyServiceMock);
 
-      const error = await SUT.findAll();
+      const error = await SUT.findAll({ page: 0, size: 10 });
 
       expect(error).toEqual({
         statusCode: HTTPStatusCode.ServerError,

@@ -3,6 +3,7 @@ import { AbstractResponse } from '../../../abstractions/infrastructure/AbstractR
 
 import CompanyDTO from '../CompanyDTO';
 import CompanyService from '../../application/CompanyService';
+import CompanySearchProps from '../CompanySearchProps';
 
 type CompanyHTTPRequestData = {
   id?: number;
@@ -11,6 +12,11 @@ type CompanyHTTPRequestData = {
   cnpj?: string;
   demandValue?: number;
   annualBilling?: number;
+};
+
+type CompanyFindAllHTTPResponseData = {
+  companies?: CompanyDTO[];
+  count?: number;
 };
 
 export default class CompanyController extends AbstractController {
@@ -44,13 +50,23 @@ export default class CompanyController extends AbstractController {
     }
   }
 
-  public async findAll(): Promise<
-    AbstractResponse<CompanyDTO | CompanyDTO[] | undefined>
-  > {
-    try {
-      const response = await this.applicationService.findAll();
+  public async findAll(
+    requestData: CompanySearchProps
+  ): Promise<AbstractResponse<CompanyFindAllHTTPResponseData | undefined>> {
+    const searchProps: CompanySearchProps = {
+      page: requestData.page || 0,
+      size: requestData.size || 3,
+    };
 
-      return this.ok<CompanyDTO | CompanyDTO[]>(response);
+    try {
+      const [companies, count] = await this.applicationService.findAll(
+        searchProps
+      );
+
+      return this.ok<CompanyFindAllHTTPResponseData>({
+        companies,
+        count,
+      });
     } catch (error) {
       return this.serverError();
     }

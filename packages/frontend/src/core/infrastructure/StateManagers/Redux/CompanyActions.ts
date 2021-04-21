@@ -1,11 +1,11 @@
 import Company from '../../../domain/Company';
 import { CompanyReduxAction } from './CompanyRedux';
 
-export default class CountryActions {
-  public findAll(companies: Company[]): CompanyReduxAction {
+export default class CompanyActions {
+  public findAll(companies: Company[], count: number): CompanyReduxAction {
     return {
       type: 'FIND_ALL',
-      payload: { companies },
+      payload: { companies: { companies, count } },
     };
   }
 

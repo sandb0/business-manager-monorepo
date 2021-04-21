@@ -1,5 +1,6 @@
 import Company from '../domain/Company';
 import CompanyDTO from '../infrastructure/CompanyDTO';
+import CompanySearchProps from '../infrastructure/CompanySearchProps';
 import ICompanyMapper from '../infrastructure/repositories/ICompanyMapper';
 import ICompanyRepository from '../infrastructure/repositories/ICompanyRepository';
 
@@ -28,10 +29,12 @@ export default class CompanyService {
     return this.mapper.toDTO(createdCompany) as CompanyDTO;
   }
 
-  public async findAll(): Promise<CompanyDTO | CompanyDTO[]> {
-    const companies = await this.repository.findAll();
+  public async findAll(
+    searchProps: CompanySearchProps
+  ): Promise<[CompanyDTO[], number]> {
+    const [companies, count] = await this.repository.findAll(searchProps);
 
-    return this.mapper.toDTO(companies);
+    return [this.mapper.toDTO(companies) as CompanyDTO[], count];
   }
 
   public async findById(companyId?: string): Promise<CompanyDTO | undefined> {

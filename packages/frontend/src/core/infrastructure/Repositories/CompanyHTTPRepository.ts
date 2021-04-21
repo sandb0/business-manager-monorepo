@@ -1,30 +1,38 @@
 import { AxiosStatic } from 'axios';
 import Company from '../../domain/Company';
+import CompanySearchProps from '../CompanySearchProps';
 import CompanyDTO from './CompanyDTO';
-import CountryMapper from './CompanyMapper';
+import CompanyMapper from './CompanyMapper';
 
 export default class CompanyHTTPRepository {
   private httpClient: AxiosStatic;
-  private repositoryMapper: CountryMapper;
+  private repositoryMapper: CompanyMapper;
 
-  public constructor(httpClient: AxiosStatic, repositoryMapper: CountryMapper) {
+  public constructor(httpClient: AxiosStatic, repositoryMapper: CompanyMapper) {
     this.httpClient = httpClient;
     this.repositoryMapper = repositoryMapper;
   }
 
-  public async findAll() {
+  public async findAll(searchProps: CompanySearchProps) {
+    const { size, page } = searchProps;
+
     const response = await this.httpClient.get(
-      process.env.REACT_APP_API_URL + '/companies'
+      process.env.REACT_APP_API_URL + `/companies?page=${page}&size=${size}`
     );
 
     let companiesResponse: CompanyDTO[] = [];
+    let count = 0;
     const responseData = response.data;
 
     if (responseData.success) {
-      companiesResponse = responseData.success as CompanyDTO[];
+      companiesResponse = responseData.success.companies as CompanyDTO[];
+      count = responseData.success.count;
     }
 
-    return this.repositoryMapper.toDomain(companiesResponse) as Company[];
+    return {
+      companies: this.repositoryMapper.toDomain(companiesResponse) as Company[],
+      count,
+    };
   }
 
   public async findById(companyId: number) {

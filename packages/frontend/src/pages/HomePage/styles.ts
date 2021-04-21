@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const ContainerStyled = styled.div``;
+export const ContainerStyled = styled.div`
+  nav.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 50px;
+  }
+`;
 
 export const CompaniesListWrapperStyled = styled.div`
   width: 100%;

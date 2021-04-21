@@ -1,8 +1,9 @@
 import CompanyService from '../../application/CompanyService';
+import CompanySearchProps from '../CompanySearchProps';
 import CompanyDTO from '../Repositories/CompanyDTO';
 import CompanyActions from '../StateManagers/Redux/CompanyActions';
 
-export default class CountryPresenter {
+export default class CompanyPresenter {
   private applicationService: CompanyService;
   private reduxActions: CompanyActions;
 
@@ -14,10 +15,12 @@ export default class CountryPresenter {
     this.reduxActions = reduxActions;
   }
 
-  public async findAll() {
-    const companies = await this.applicationService.findAll();
+  public async findAll(searchProps: CompanySearchProps) {
+    const { companies, count } = await this.applicationService.findAll(
+      searchProps
+    );
 
-    return this.reduxActions.findAll(companies);
+    return this.reduxActions.findAll(companies, count);
   }
 
   public async findById(companyId: number) {

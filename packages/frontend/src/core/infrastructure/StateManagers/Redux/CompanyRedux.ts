@@ -5,7 +5,7 @@ export type CompanyReduxStore = {
 };
 
 export type CompanyReduxState = {
-  companies?: Company[];
+  companies?: { companies?: Company[]; count?: number };
   selectedCompany?: Company;
 };
 

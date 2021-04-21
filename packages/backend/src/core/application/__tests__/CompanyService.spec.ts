@@ -50,12 +50,14 @@ describe('Application - CompanyService', () => {
     it('should call the expected Repository and Mapper methods with correct company data and return a list of CompanyDTO', async () => {
       companyRepositoryMock.findAll = jest
         .fn()
-        .mockReturnValue([expectedCompany, expectedCompany]);
-      companyMapperMock.toDTO = jest.fn().mockReturnValue(expectedCompanyDTO);
+        .mockReturnValue([[expectedCompany, expectedCompany], 2]);
+      companyMapperMock.toDTO = jest
+        .fn()
+        .mockReturnValue([expectedCompanyDTO, expectedCompanyDTO]);
 
       const SUT = new CompanyService(companyRepositoryMock, companyMapperMock);
 
-      const companiesDTO = await SUT.findAll();
+      const companiesDTO = await SUT.findAll({ page: 0, size: 10 });
 
       expect(companyRepositoryMock.findAll).toBeCalledTimes(1);
 
@@ -65,7 +67,10 @@ describe('Application - CompanyService', () => {
         expectedCompany,
       ]);
 
-      expect(companiesDTO).toEqual(expectedCompanyDTO);
+      expect(companiesDTO).toEqual([
+        [expectedCompanyDTO, expectedCompanyDTO],
+        2,
+      ]);
     });
   });
 

@@ -1,6 +1,7 @@
 import { Connection } from 'typeorm';
 
 import Company from '../../../domain/Company';
+import CompanySearchProps from '../../CompanySearchProps';
 import ICompanyRepository from '../ICompanyRepository';
 import CompanyMapper from './CompanyMapper';
 import { CompanyModel } from './models';
@@ -31,12 +32,17 @@ export default class CompanyRepository implements ICompanyRepository {
     return this.mapper.toDomain(createdCompanyModel) as Company;
   }
 
-  public async findAll(): Promise<Company | Company[]> {
+  public async findAll(
+    searchProps: CompanySearchProps
+  ): Promise<[Company[], number]> {
     const companyORMRepository = this.connection.getRepository(CompanyModel);
 
-    const companiesModel = await companyORMRepository.find();
+    const [companiesModel, count] = await companyORMRepository.findAndCount({
+      skip: searchProps.page * searchProps.size,
+      take: searchProps.size,
+    });
 
-    return this.mapper.toDomain(companiesModel);
+    return [this.mapper.toDomain(companiesModel) as Company[], count];
   }
 
   public async findById(companyId: number): Promise<Company | undefined> {

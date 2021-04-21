@@ -1,4 +1,5 @@
 import Company from '../domain/Company';
+import CompanySearchProps from '../infrastructure/CompanySearchProps';
 import CompanyDTO from '../infrastructure/Repositories/CompanyDTO';
 import CompanyHTTPRepository from '../infrastructure/Repositories/CompanyHTTPRepository';
 
@@ -9,8 +10,8 @@ export default class CompanyService {
     this.remoteRepository = remoteRepository;
   }
 
-  public async findAll() {
-    return await this.remoteRepository.findAll();
+  public async findAll(searchProps: CompanySearchProps) {
+    return await this.remoteRepository.findAll(searchProps);
   }
 
   public async findById(companyId: number) {
