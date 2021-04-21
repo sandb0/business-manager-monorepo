@@ -91,7 +91,7 @@ const HomePage: React.FC<Props> = (props: Props) => {
         <Pagination
           className="pagination"
           page={getPage() + 1}
-          count={Math.round((companies?.count || pageSize) / pageSize)}
+          count={Math.ceil((companies?.count || pageSize) / pageSize)}
           shape="rounded"
           onChange={handlePagination}
         />
