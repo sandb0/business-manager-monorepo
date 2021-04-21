@@ -84,10 +84,6 @@ const HomePage: React.FC<Props> = (props: Props) => {
           <ButtonElement label="Adicionar nova Empresa" to="/company" />
         </TitleComponent>
 
-        <CompaniesListWrapperStyled>
-          {cardsCompaniesComponents}
-        </CompaniesListWrapperStyled>
-
         <Pagination
           className="pagination"
           page={getPage() + 1}
@@ -95,6 +91,10 @@ const HomePage: React.FC<Props> = (props: Props) => {
           shape="rounded"
           onChange={handlePagination}
         />
+
+        <CompaniesListWrapperStyled>
+          {cardsCompaniesComponents}
+        </CompaniesListWrapperStyled>
       </MainSection>
     </ContainerStyled>
   );

@@ -34,6 +34,7 @@ export const ContainerStyled = styled.div`
       }
 
       input,
+      select,
       textarea {
         ${inputStyle}
       }

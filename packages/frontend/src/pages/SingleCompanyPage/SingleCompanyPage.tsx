@@ -6,6 +6,7 @@ import CompanyPresenter from '../../core/infrastructure/Presenters/CompanyPresen
 import { CompanyReduxStore } from '../../core/infrastructure/StateManagers/Redux/CompanyRedux';
 
 import { TitleComponent } from '../../design/components';
+import { annualBillingOptions } from '../../design/constants';
 import { ButtonElement } from '../../design/elements';
 import { HeaderSection, MainSection } from '../../design/sections';
 
@@ -57,12 +58,19 @@ const SingleCompanyPage: React.FC<Props> = (props: Props) => {
 
           <div>
             <h4>Demanda (Valor Monetário)</h4>
-            <p>{company?.demandValue}</p>
+            <p>R$ {company?.demandValue.toLocaleString('pt-BR')}</p>
           </div>
 
           <div>
             <h4>Faturamento Anual</h4>
-            <p>{company?.annualBilling}</p>
+
+            {annualBillingOptions.map((option, index) => {
+              if (index === company?.annualBilling) {
+                return <p>{option}</p>;
+              }
+
+              return '';
+            })}
           </div>
 
           <div>

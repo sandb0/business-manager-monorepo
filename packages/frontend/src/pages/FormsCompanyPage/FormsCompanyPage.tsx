@@ -8,6 +8,7 @@ import CompanyDTO from '../../core/infrastructure/Repositories/CompanyDTO';
 import { CompanyReduxStore } from '../../core/infrastructure/StateManagers/Redux/CompanyRedux';
 
 import { TitleComponent } from '../../design/components';
+import { annualBillingOptions } from '../../design/constants';
 import { HeaderSection, MainSection } from '../../design/sections';
 
 import { ContainerStyled } from './styles';
@@ -145,16 +146,21 @@ const FormsCompanyPage: React.FC<Props> = (props: Props) => {
           <div>
             <h4>Faturamento Anual da Empresa</h4>
 
-            <input
-              type="text"
-              value={formData.annualBilling}
+            <select
+              defaultValue={company?.annualBilling}
               onChange={(event) =>
                 setFormData({
                   ...formData,
-                  annualBilling: parseInt(event.target.value || '0'),
+                  annualBilling: parseInt(event.target.value),
                 })
               }
-            />
+            >
+              {annualBillingOptions.map((option, index) => (
+                <option key={index} value={index}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>

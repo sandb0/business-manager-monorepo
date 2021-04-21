@@ -10,7 +10,7 @@ export const ContainerStyled = styled.div`
 
 export const CompaniesListWrapperStyled = styled.div`
   width: 100%;
-  margin: 50px auto 0 auto;
+  margin: 20px auto 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
